@@ -55,6 +55,7 @@ Resources:
             !Sub "${EnvironmentName}-PRIV-NETS"
       LaunchConfigurationName: 
         Ref : WebAppLaunchConfig
-      MaxSize: '2'
-      MinSize: '1'
+      MaxSize: '4'
+      MinSize: '4'
+      DesiredCapacity: '4'
       
