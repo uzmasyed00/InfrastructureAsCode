@@ -1,0 +1,24 @@
+Description: >
+  Uzma /Udacity 2019
+  
+Parameters:
+
+    EnvironmentName:
+      Description: An environment name that will be prefixed to the resource stack
+      Type: String
+
+Resources:
+  WebAppTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 35
+      HealthCheckPath: /
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 30
+      HealthyThresholdCount: 2
+      Port: 80
+      Protocol: HTTP
+      UnhealthyThresholdCount: 5
+      VpcId: 
+        Fn::ImportValue:
+          Fn::Sub: "${EnvironmentName}-VPCID"
