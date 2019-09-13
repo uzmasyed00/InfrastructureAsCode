@@ -51,6 +51,7 @@ Resources:
     Properties:
         ImageId: ami-04b762b4289fba92b
         InstanceType: t3.medium
+        IamInstanceProfile: 'InstanceProfile'
         BlockDeviceMappings: 
           - DeviceName: "/dev/sdk"
             Ebs:
@@ -124,5 +125,29 @@ Resources:
         Values: [/]
       ListenerArn: !Ref 'Listener' 
       Priority: 1
+  IAMRole:
+    Type: AWS::IAM::Role
+    Properties: 
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "ec2.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Description: 'IAM role for Udagram to access files from S3'
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+      RoleName: 'FullAccess'
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      InstanceProfileName: UdagramInstance
+      Roles: 
+        - !Ref IAMRole
+
+  
 
       
