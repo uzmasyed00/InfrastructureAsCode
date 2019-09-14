@@ -51,7 +51,7 @@ Resources:
     Properties:
         ImageId: ami-04b762b4289fba92b
         InstanceType: t3.medium
-        IamInstanceProfile: 'InstanceProfile'
+        IamInstanceProfile: !Ref S3InstanceProfile
         BlockDeviceMappings: 
           - DeviceName: "/dev/sdk"
             Ebs:
@@ -141,7 +141,7 @@ Resources:
       ManagedPolicyArns: 
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
       RoleName: 'FullAccess'
-  InstanceProfile:
+  S3InstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties: 
       InstanceProfileName: UdagramInstance
