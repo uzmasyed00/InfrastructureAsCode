@@ -51,7 +51,7 @@ Resources:
     Properties:
         ImageId: ami-04b762b4289fba92b
         InstanceType: t3.medium
-        IamInstanceProfile: !Ref S3InstanceProfile
+        IamInstanceProfile: !Ref InstanceProfile
         BlockDeviceMappings: 
           - DeviceName: "/dev/sdk"
             Ebs:
@@ -66,7 +66,7 @@ Resources:
             apt-get install apache2 -y
             systemctl start apache2.service
             cd /var/www/html
-            aws s3 cp s3://udacity-demo-1/udacity.zip .
+            aws s3 cp s3://udagram/udacity.zip .
             unzip -o udacity.zip
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
@@ -141,7 +141,7 @@ Resources:
       ManagedPolicyArns: 
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
       RoleName: 'FullAccess'
-  S3InstanceProfile:
+  InstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties: 
       InstanceProfileName: UdagramInstance
