@@ -49,7 +49,7 @@ Resources:
   WebAppLaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
-        ImageId: ami-04b762b4289fba92b
+        ImageId: ami-06f2f779464715dc5
         InstanceType: t3.medium
         IamInstanceProfile: !Ref InstanceProfile
         BlockDeviceMappings: 
@@ -68,6 +68,8 @@ Resources:
             cd /var/www/html
             aws s3 cp s3://udagram/udacity.zip .
             unzip -o udacity.zip
+            systemctl stop apache2.service
+            systemctl start apache2.service
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties: 
